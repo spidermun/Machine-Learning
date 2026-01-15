@@ -2,6 +2,7 @@ from sklearn.tree import DecisionTreeRegressor
 import pandas as pd
 import kagglehub
 import os
+from sklearn.metrics import mean_absolute_error
 
 # Pobierz dataset
 path = kagglehub.dataset_download("dansbecker/melbourne-housing-snapshot")
@@ -25,6 +26,10 @@ melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude'
 X = melbourne_data[melbourne_features]
 X.describe()
 X.head()
+
+
+predicted_home_prices = melbourne_model.predict(X)
+mean_absolute_error(y, predicted_home_prices)
 
 # Fit model
 melbourne_model.fit(X, y)
